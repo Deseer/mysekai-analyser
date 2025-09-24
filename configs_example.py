@@ -10,7 +10,6 @@ DEFAULT_BOLD_FONT_PATH = ""
 DEFAULT_HEAVY_FONT_PATH = ""
 
 # main
-RESOURCE_PATH = "./resources"
 INPUT_FILE = "./mysekai.json"
 TARGET_REGION = "jp"
 SHOW_HARVESTED = True
