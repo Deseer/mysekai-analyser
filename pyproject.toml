@@ -1,0 +1,26 @@
+[project]
+name = "mysekaianalyser"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp>=3.12.15",
+    "aiosmtplib>=4.0.2",
+    "cryptography>=46.0.1",
+    "ffmpeg-python>=0.2.0",
+    "mistune>=3.1.4",
+    "msgpack-python>=0.5.6",
+    "nonebot>=1.9.1",
+    "nonebot-plugin-apscheduler>=0.5.0",
+    "numpy>=2.3.3",
+    "orjson>=3.11.3",
+    "pilmoji>=2.0.4",
+    "pyyaml>=6.0.2",
+    "requests>=2.32.5",
+    "selenium>=4.35.0",
+    "tenacity>=9.1.2",
+    "tqdm>=4.67.1",
+    "uvloop>=0.21.0",
+    "zhconv>=1.4.3",
+    "zhon>=2.1.1",
+]
