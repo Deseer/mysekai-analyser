@@ -11,7 +11,7 @@ import configs
 # --- 配置区 ---
 RESOURCE_PATH = configs.RESOURCE_PATH
 TARGET_REGION = configs.TARGET_REGION
-METADATA_BASE_URL = configs.METADATA_BASE_URL
+METADATA_BASE_URL = configs.MASTERDATA_BASE_URL
 ASSET_BASE_URL = configs.ASSET_BASE_URL
 
 # --- 文件清单 ---
