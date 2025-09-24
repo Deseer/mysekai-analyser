@@ -1,4 +1,5 @@
 import json
+import configs
 from PIL import Image
 from datetime import datetime
 from typing import List, Tuple, Optional
@@ -9,7 +10,7 @@ SITE_ID_ORDER = (5, 7, 6, 8)
 MOST_RARE_MYSEKAI_RES = ["mysekai_material_5", "mysekai_material_12", "mysekai_material_20", "mysekai_material_24", "mysekai_fixture_121", "material_17", "material_170"]
 RARE_MYSEKAI_RES = ["mysekai_material_32", "mysekai_material_33", "mysekai_material_34", "mysekai_material_61", "mysekai_material_64", "mysekai_material_65", "mysekai_material_66"]
 MYSEKAI_HARVEST_MAP_IMAGE_SCALE = 0.8
-ENABLE_MAP_CROPPING = True
+ENABLE_MAP_CROPPING = configs.ENABLE_MAP_CROPPING
 
 SITE_MAP_CONFIGS = {
     5: {"image": "mysekai/site_map/5.png", "grid_size": 33.333, "offset_x": 0, "offset_z": -60, "dir_x": -1, "dir_z": -1, "rev_xz": True, "crop_bbox": [250, 150, 840, 560]},
