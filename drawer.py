@@ -164,7 +164,9 @@ def draw_harvest_map_image(data: HarvestMapDrawData, loader: LocalAssetLoader) -
         for res in data.dropped_resources:
             if not hasattr(res, 'image') or res.image.width <= 1: continue
             img = res.image.resize((res.size, res.size), Image.Resampling.LANCZOS)
-            pos = (res.x, res.z)
+            offset_x = 0
+            offset_y = 30
+            pos = (res.x + offset_x, res.z + offset_y)
             canvas_img.paste(img, pos, img)
             if hasattr(res, 'outline') and res.outline: draw.rectangle([pos, (pos[0] + res.size, pos[1] + res.size)], outline=res.outline[0], width=res.outline[1])
             if not hasattr(res, 'is_small_icon') or not res.is_small_icon:

@@ -22,9 +22,6 @@ METADATA_FILES = [
 ]
 
 STATIC_FILES = [
-    "mysekai/mark.png",
-    "mysekai/light.png",
-    "mysekai/music_record.png",
     *[f"mysekai/gate_icon/gate_{i}.png" for i in range(1, 6)],
 ]
 
