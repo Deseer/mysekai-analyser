@@ -126,19 +126,15 @@ def extract_all_harvest_map_data(mysekai_info: dict, loader: LocalAssetLoader, s
             print(f"[Extractor] Map: No map data found for site_id {site_id}. Skipping map generation.")
     return map_data_list
 
-# 在你的 extractor.py 文件中，找到并完整替换这个函数 (最终精确复刻版)
 
 def _extract_single_harvest_map_data(site_map_info: dict, loader: LocalAssetLoader, show_harvested: bool) -> HarvestMapDrawData:
     site_id = site_map_info['mysekaiSiteId']
     config = SITE_MAP_CONFIGS[site_id]
 
-    scale = MYSEKAI_HARVEST_MAP_IMAGE_SCALE # 0.8
+    scale = MYSEKAI_HARVEST_MAP_IMAGE_SCALE
 
-    # --- 步骤 1: ★★★ 精确复刻目标代码的坐标系建立流程 ★★★ ---
     site_image_original = loader.get(config['image'])
 
-    # ★ 1.1 关键修正：首先，基于【原始、未裁剪】的图像尺寸计算 mid_x 和 mid_z
-    # 这必须是第一步，以匹配目标代码的逻辑。
     mid_x = (site_image_original.width * scale) / 2
     mid_z = (site_image_original.height * scale) / 2
 
@@ -147,13 +143,11 @@ def _extract_single_harvest_map_data(site_map_info: dict, loader: LocalAssetLoad
     offset_x = config['offset_x'] * scale
     offset_z = config['offset_z'] * scale
 
-    # 1.3 现在，处理裁剪，并更新 draw_w, draw_h 和 offset
     crop_bbox = config.get('crop_bbox')
     if ENABLE_MAP_CROPPING and crop_bbox:
         bg_for_render_unscaled = site_image_original.crop((crop_bbox[0], crop_bbox[1], crop_bbox[0] + crop_bbox[2], crop_bbox[1] + crop_bbox[3]))
         draw_w = int(crop_bbox[2] * scale)
         draw_h = int(crop_bbox[3] * scale)
-        # 根据目标代码，offset 在这里进行减法调整
         offset_x -= crop_bbox[0] * scale
         offset_z -= crop_bbox[1] * scale
     else:
@@ -161,7 +155,7 @@ def _extract_single_harvest_map_data(site_map_info: dict, loader: LocalAssetLoad
         draw_w = int(site_image_original.width * scale)
         draw_h = int(site_image_original.height * scale)
 
-    # 1.4 定义坐标转换函数，它现在使用正确的 mid_x, mid_z 和 offset
+    # 定义坐标转换函数
     def get_center_pos(x, z) -> tuple[int, int]:
         if config['rev_xz']: x, z = z, x
         px = x * grid_size * config['dir_x'] + mid_x + offset_x
@@ -170,7 +164,6 @@ def _extract_single_harvest_map_data(site_map_info: dict, loader: LocalAssetLoad
         pz = max(0, min(pz, draw_h))
         return int(px), int(pz)
 
-    # --- 步骤 2: 计算所有元素的最终绘制参数 (这部分逻辑已正确) ---
     point_img_size = int(160 * scale)
     large_res_size = int(35 * scale)
     small_res_size = int(17 * scale)

@@ -156,70 +156,57 @@ def draw_summary_image(data: SummaryDrawData, loader) -> Image.Image:
     return add_watermark(final_image)
 
 # ======================================================================
-#  地图绘制逻辑 (已重构，适配 extractor.py 的输出)
+#  地图绘制逻辑
 # ======================================================================
-# 在你的 drawer.py 文件中，找到并完整替换这个函数 (最终精确翻译版)
 
 def draw_harvest_map_image(data: HarvestMapDrawData, loader) -> Image.Image:
     """
     接收已经计算好所有左上角坐标的数据，直接在最终尺寸的画布上进行绘制。
     """
-    # --- 步骤 1: 创建【最终尺寸】的画布 ---
     canvas = Image.new("RGBA", (data.draw_width, data.draw_height))
     draw = ImageDraw.Draw(canvas, "RGBA")
 
-    # --- 步骤 2: 粘贴背景图 ---
     if data.map_bg_image.width > 1:
         canvas.paste(data.map_bg_image, (0, 0))
 
-    # --- 步骤 3: 按照“绘制清单”进行绘制 ---
-
-    # 3.1 绘制采集点 (extractor 已经计算好了左上角坐标)
+    # 绘制采集点
     if hasattr(data, 'harvest_points'):
         for point in data.harvest_points:
             if point.image.width > 1:
-                # 直接使用 extractor 提供的 x, y作为左上角坐标
                 canvas.paste(point.image, (point.x, point.y), point.image)
 
-    # 3.2 绘制出生点
+    # 绘制出生点
     if hasattr(data, 'spawn_point'):
-        # 目标代码使用一个图片并居中，我们用红叉模拟
         center_x, center_y = data.spawn_point
         spawn_size = int(20 * MYSEKAI_HARVEST_MAP_IMAGE_SCALE)
         half_size = spawn_size // 2
         draw.line([(center_x - half_size, center_y - half_size), (center_x + half_size, center_y + half_size)], fill=RED, width=3)
         draw.line([(center_x + half_size, center_y - half_size), (center_x - half_size, center_y + half_size)], fill=RED, width=3)
 
-    # 3.3 绘制掉落物 (extractor 已经计算好了左上角坐标)
     if hasattr(data, 'dropped_resources'):
-        # 先画发光
         for res in data.dropped_resources:
             if res.light_size:
                 try:
                     light_img = loader.get("mysekai/light.png").resize((res.light_size, res.light_size), Image.Resampling.LANCZOS)
-                    # 发光效果居中于图标
                     pos_x = int(res.x + res.size / 2 - res.light_size / 2)
                     pos_y = int(res.z + res.size / 2 - res.light_size / 2)
                     canvas.paste(light_img, (pos_x, pos_y), light_img)
                 except Exception: pass
-        # 再画图标和边框
         for res in data.dropped_resources:
             if res.image.width <= 1: continue
             img_resized = res.image.resize((res.size, res.size), Image.Resampling.LANCZOS)
             canvas.paste(img_resized, (res.x, res.z), img_resized)
             if res.outline:
                 draw.rectangle([(res.x, res.z), (res.x + res.size, res.z + res.size)], outline=res.outline[0], width=res.outline[1])
-        # 最后画文字
         for res in data.dropped_resources:
             if res.is_small_icon: continue
             text = f"{res.quantity}"
-            pos = (res.x, res.z - 1) # 目标代码的文字有-1的偏移
+            pos = (res.x, res.z - 1)
             scale = MYSEKAI_HARVEST_MAP_IMAGE_SCALE
             font_size = int(11 * scale); font_path = DEFAULT_BOLD_FONT_PATH; color = (50, 50, 50, 255)
             if res.quantity == 2: font_path, font_size, color = DEFAULT_HEAVY_FONT_PATH, int(13 * scale), (200, 20, 0, 255)
             elif res.quantity > 2: font_path, font_size, color = DEFAULT_HEAVY_FONT_PATH, int(13 * scale), (200, 20, 200, 255)
             font = ImageFont.truetype(font_path, font_size)
-            # 目标代码没有文字描边，这里为了对齐也去掉
             draw.text(pos, text, font=font, fill=color)
 
     return canvas
@@ -228,7 +215,6 @@ def draw_harvest_map_image(data: HarvestMapDrawData, loader) -> Image.Image:
 #  图片拼接逻辑 (保持不变)
 # ======================================================================
 def combine_and_save_maps(map_data_list: List[HarvestMapDrawData], loader, filename: str):
-    # 先调用本文件中的 draw_harvest_map_image 生成所有地图图片
     map_images = [draw_harvest_map_image(data, loader) for data in map_data_list]
     map_images = [img for img in map_images if img and img.width > 1]
     if not map_images:
