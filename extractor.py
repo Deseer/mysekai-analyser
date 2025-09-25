@@ -9,14 +9,14 @@ from loader import LocalAssetLoader, UNKNOWN_IMG
 SITE_ID_ORDER = (5, 7, 6, 8)
 MOST_RARE_MYSEKAI_RES = ["mysekai_material_5", "mysekai_material_12", "mysekai_material_20", "mysekai_material_24", "mysekai_fixture_121", "material_17", "material_170"]
 RARE_MYSEKAI_RES = ["mysekai_material_32", "mysekai_material_33", "mysekai_material_34", "mysekai_material_61", "mysekai_material_64", "mysekai_material_65", "mysekai_material_66"]
-MYSEKAI_HARVEST_MAP_IMAGE_SCALE = 0.8
+MYSEKAI_HARVEST_MAP_IMAGE_SCALE = 1
 ENABLE_MAP_CROPPING = configs.ENABLE_MAP_CROPPING
 
 SITE_MAP_CONFIGS = {
-    5: {"image": "mysekai/site_map/5.png", "grid_size": 33.333, "offset_x": 0, "offset_z": -60, "dir_x": -1, "dir_z": -1, "rev_xz": True, "crop_bbox": [250, 150, 840, 560]},
-    6: {"image": "mysekai/site_map/7.png", "grid_size": 20.6, "offset_x": -10, "offset_z": 90, "dir_x": 1, "dir_z": -1, "rev_xz": False, "crop_bbox": [350, 150, 840, 560]},
-    7: {"image": "mysekai/site_map/6.png", "grid_size": 24.8, "offset_x": -55, "offset_z": 30, "dir_x": -1, "dir_z": -1, "rev_xz": True, "crop_bbox": [300, 120, 840, 560]},
-    8: {"image": "mysekai/site_map/8.png", "grid_size": 21.3, "offset_x": 10, "offset_z": -120, "dir_x": 1, "dir_z": -1, "rev_xz": False, "crop_bbox": [350, 100, 840, 560]}
+    5: {"image": "mysekai/site_map/5.png", "grid_size": 33.333, "offset_x": 0, "offset_z": -60, "dir_x": -1, "dir_z": -1, "rev_xz": True, "crop_bbox": [300, 0, 1280, 1080]},
+    6: {"image": "mysekai/site_map/7.png", "grid_size": 20.513, "offset_x": 0, "offset_z": 80, "dir_x": 1, "dir_z": -1, "rev_xz": False, "crop_bbox": [300, 0, 1280, 1080]},
+    7: {"image": "mysekai/site_map/6.png", "grid_size": 24.806, "offset_x": -62.015, "offset_z": 20.672, "dir_x": -1, "dir_z": -1, "rev_xz": True, "crop_bbox": [350, 0, 1280, 1080]},
+    8: {"image": "mysekai/site_map/8.png", "grid_size": 21.333, "offset_x": 0, "offset_z": -130, "dir_x": 1, "dir_z": -1, "rev_xz": False, "crop_bbox": [200, 0, 1280, 1080]}
 }
 
 SUMMARY_PREVIEW_IMAGE_MAP = {
