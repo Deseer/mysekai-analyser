@@ -1,8 +1,8 @@
 # asset
 RESOURCE_PATH = "./resources"
 TARGET_REGION = "jp"
-MASTERDATA_BASE_URL = ""    #masterdata项目地址
-ASSET_BASE_URL = f"https:///{TARGET_REGION}-assets/" #补url端点
+MASTERDATA_BASE_URL = ""    #masterdata项目地址填"https://raw.githubusercontent.com"单文件链接，问就是代码这么写的
+ASSET_BASE_URL = f"https:///{TARGET_REGION}-assets/" #补url端点，保留/{TARGET_REGION}-assets/，史山发力了
 
 # fonts(随便拖点字体进来就行)
 DEFAULT_FONT_PATH = ""
@@ -11,12 +11,12 @@ DEFAULT_HEAVY_FONT_PATH = ""
 
 # main
 INPUT_FILE = "./mysekai.json"
-TARGET_REGION = "jp"
 SHOW_HARVESTED = True
 OUTPUT_SUMMARY_FILENAME = "output_summary.png"
 OUTPUT_MAPS_FILENAME = "output_maps.png"
 
-ENABLE_MAP_CROPPING = False #别动没改好
+# extractor
+ENABLE_MAP_CROPPING = True #裁剪地图到合适大小
 
 aes_key_bytes = b''
 aes_iv_bytes = b''
