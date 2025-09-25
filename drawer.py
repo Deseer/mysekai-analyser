@@ -65,7 +65,7 @@ def draw_rounded_rect(image_draw, bounds, radius, fill):
 
 
 # ======================================================================
-#  资源统计图绘制逻辑 (保持不变)
+#  资源统计图绘制逻辑
 # ======================================================================
 def draw_summary_image(data: SummaryDrawData, loader) -> Image.Image:
     canvas_w, canvas_h_est = 800, 2000
@@ -127,7 +127,7 @@ def draw_summary_image(data: SummaryDrawData, loader) -> Image.Image:
             if hasattr(char, 'sd_image') and char.sd_image.width > 1:
                 char_img_resized = char.sd_image.resize((100, 80))
                 canvas.paste(char_img_resized, (char_x, panel_y_cursor + 10), char_img_resized)
-                char_x += 85
+                char_x += 100
         panel_y_cursor += visited_box_h + 16
 
     if hasattr(data, 'site_summaries'):
@@ -212,7 +212,7 @@ def draw_harvest_map_image(data: HarvestMapDrawData, loader) -> Image.Image:
     return canvas
 
 # ======================================================================
-#  图片拼接逻辑 (保持不变)
+#  图片拼接逻辑
 # ======================================================================
 def combine_and_save_maps(map_data_list: List[HarvestMapDrawData], loader, filename: str):
     map_images = [draw_harvest_map_image(data, loader) for data in map_data_list]
