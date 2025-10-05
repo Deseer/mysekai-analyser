@@ -109,7 +109,7 @@ async def main():
     for fixture in load_json_table("mysekaiFixtures.json"):
         name = fixture['assetbundleName']
         for i in range(1, 7): # 下载所有可能的颜色变体
-            asset_paths.add(f"mysekai/thumbnail/fixture/{name}_{i}.png")
+            asset_paths.add(f"mysekai/thumbnail/fixture/{name}_{i}_1.png")
 
     # 唱片封面 -> assets
     musics_map = {m['id']: m['assetbundleName'] for m in load_json_table("musics.json")}

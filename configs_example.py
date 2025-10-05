@@ -1,7 +1,7 @@
 # asset
 RESOURCE_PATH = "./resources"
 TARGET_REGION = "jp"
-MASTERDATA_BASE_URL = ""    #masterdata项目地址填"https://raw.githubusercontent.com"单文件链接，问就是代码这么写的
+MASTERDATA_BASE_URL = ""
 ASSET_BASE_URL = f"https:///{TARGET_REGION}-assets/" #补url端点，保留/{TARGET_REGION}-assets/，史山发力了
 
 # fonts(随便拖点字体进来就行)
